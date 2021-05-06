@@ -2,6 +2,10 @@
 
 library(raster) # require(raster)
 library(RStoolbox) # for vegetation indices calculation
+# install.packages("rasterdiv")
+library(rasterdiv) # for the worldwide NDVI
+library(rasterVis)
+
 setwd("C:/lab/") 
 
 defor1 <- brick("defor1.jpg")
@@ -84,3 +88,19 @@ difndvi <- ndvi1 - ndvi2
 cld <- colorRampPalette(c('blue','white','red'))(100) 
 plot(difndvi, col=cld)
 
+# worldwide NDVI
+plot(copNDVI)
+
+# Pixels with values 253, 254 and 255 (water) will be set as NA's.
+
+copNDVI <- reclassify(copNDVI, cbind(253:255, NA))
+plot(copNDVI)
+
+# rasterVis package needed:
+levelplot(copNDVI)
+
+
+
+
+
+ 
