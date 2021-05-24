@@ -28,13 +28,11 @@ clsd <- colorRampPalette(c('blue','green','pink','magenta','orange','brown','red
 plot(ndvisd3, col=clsd)
 
 # mean ndvi with focal
-
 ndvimean3 <- focal(ndvi, w=matrix(1/9, nrow=3, ncol=3), fun=mean)
 clsd <- colorRampPalette(c('blue','green','pink','magenta','orange','brown','red','yellow'))(100) 
 plot(ndvimean3, col=clsd)
 
 # changing window size
-
 ndvimean13 <- focal(ndvi, w=matrix(1/169, nrow=13, ncol=13), fun=mean)
 clsd <- colorRampPalette(c('blue','green','pink','magenta','orange','brown','red','yellow'))(100) 
 plot(ndvimean13, col=clsd)
@@ -44,7 +42,6 @@ clsd <- colorRampPalette(c('blue','green','pink','magenta','orange','brown','red
 plot(ndvisd5, col=clsd)
 
 # PCA
-
 sentpca <- rasterPCA(sent)
 
 plot(sentpca$map)
