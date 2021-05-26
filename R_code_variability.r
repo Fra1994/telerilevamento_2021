@@ -2,16 +2,22 @@
 
 library(raster)
 library(RStoolbox)
-
+library(ggplot2) # for ggplot plotting
+library(gridExtra) # for plotting ggplots together
+# install.packages("viridis")
+library(viridis) # for ggplot colouring
 setwd("C:/lab/")
+
+sent <- brick("sentinel.png")
+sent
+plotRGB(sent)
 
 # NIR 1, RED 2, GREEN 3
 # r=1, g=2, b=3
 plotRGB(sent, stretch="lin")
 # plotRGB(sent, r=1, g=2, b=3, stretch="lin")
  
-# plotRGB(sent, r=2, g=1, b=3, stretch="lin")
- 
+# plotRGB(sent, r=2, g=1, b=3, stretch="lin") 
 nir <- sent$sentinel.1
 red <- sent$sentinel.2
 
@@ -43,9 +49,46 @@ plot(ndvisd5, col=clsd)
 
 # PCA
 sentpca <- rasterPCA(sent)
-
 plot(sentpca$map)
+sentpca
 
 summary(sentpca$model)
- 
 # the first PC contains 67.36804% of the original information
+
+pc1 <- sentpca$map$PC1
+plot(sentpca$map$PC1)
+
+pc1sd5 <- focal(pc1, w=matrix(1/25, nrow=5, ncol=5), fun=sd)
+clsd <- colorRampPalette(c('blue','green','pink','magenta','orange','brown','red','yellow'))(100) # 
+plot(pc1sd5, col=clsd)
+
+# pc1 <- sentpca$map$PC1
+# pc1sd7 <- focal(pc1, w=matrix(1/49, nrow=7, ncol=7), fun=sd)
+# plot(pc1sd7)
+
+# With the source function you can upload code from outside!
+source("source_test_lezione.r")
+source("source_ggplot.r")
+
+# https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html
+# The package contains eight color scales: “viridis”, the primary choice, and five alternatives with similar properties - “magma”, “plasma”, “inferno”, “civids”, “mako”, and “rocket” -, and a rainbow color map - “turbo”.
+
+ggplot() +
+geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis() 
+ggtitle("Standard deviation of PC1 by viridis colour scale")
+
+ggplot() +
+geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis(option = "magma")  +
+ggtitle("Standard deviation of PC1 by magma colour scale")
+ 
+ggplot() +
+geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis(option = "inferno")  +
+ggtitle("Standard deviation of PC1 by inferno colour scale")
+
+ggplot() +
+geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis(option = "turbo")  +
+ggtitle("Standard deviation of PC1 by turbo colour scale")
