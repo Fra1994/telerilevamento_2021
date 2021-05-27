@@ -73,22 +73,22 @@ source("source_ggplot.r")
 # https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html
 # The package contains eight color scales: “viridis”, the primary choice, and five alternatives with similar properties - “magma”, “plasma”, “inferno”, “civids”, “mako”, and “rocket” -, and a rainbow color map - “turbo”.
 
-ggplot() +
+p1 <- ggplot() +
 geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
 scale_fill_viridis() 
 ggtitle("Standard deviation of PC1 by viridis colour scale")
 
-ggplot() +
+p2 <- ggplot() +
 geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
 scale_fill_viridis(option = "magma")  +
 ggtitle("Standard deviation of PC1 by magma colour scale")
  
-ggplot() +
-geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
-scale_fill_viridis(option = "inferno")  +
-ggtitle("Standard deviation of PC1 by inferno colour scale")
-
-ggplot() +
+p3 <- ggplot() +
 geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) +
 scale_fill_viridis(option = "turbo")  +
 ggtitle("Standard deviation of PC1 by turbo colour scale")
+
+grid.arrange(p1, p2, p3, nrow = 1)
+
+
+
