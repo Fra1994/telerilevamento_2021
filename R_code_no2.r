@@ -27,14 +27,18 @@ plot(EN13, col=cls)
 
 # 5. Make the difference between the two images and plot it
 # with March - January or January - March
+
 ENdif <- EN01 - EN13
 plot(ENdif, col=cls)
 
 # 6. Plot everything, altogether
+
 par(mfrow=c(3,1))
 plot(EN01, col=cls, main="NO2 in January")
 plot(EN13, col=cls, main="NO2 in March")
 plot(ENdif, col=cls, main="Difference (January - March)")
+
+# 7. Import the whole set
 
 # list of files:
 rlist <- list.files(pattern="EN")
@@ -46,9 +50,8 @@ import
 EN <- stack(import)
 plot(EN, col=cls)
 
-
-
 # 8. Replicate the plot of images 1 and 13 using the stack
+
 par(mfrow=c(2,1))
 plot(EN$EN_0001, col=cls)
 plot(EN$EN_0013, col=cls)
