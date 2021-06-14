@@ -1,7 +1,7 @@
 # R_code_no2.r
 
 library(raster)
- 
+library(RStoolbox) # here used for raster based multivariate analysis
 # 1. Set the working directory
 
 setwd("C:/lab/EN")
@@ -56,3 +56,19 @@ par(mfrow=c(2,1))
 plot(EN$EN_0001, col=cls)
 plot(EN$EN_0013, col=cls)
  
+# 9. Compute a PCA over the 13 images
+
+ENpca <- rasterPCA(EN)
+
+summary(ENpca$model)
+
+dev.off()
+plotRGB(ENpca$map, r=1, g=2, b=3, stretch="lin")
+
+# 10. Compute the local variability (local standard deviation) of the first PC
+
+PC1sd <- focal(ENpca$map$PC1, w=matrix(1/9, nrow=3, ncol=3, fun=sd)
+        
+plot(PC1sd, col=cls)       
+               
+               
