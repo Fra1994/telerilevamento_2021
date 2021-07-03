@@ -59,7 +59,13 @@ levelplot(artic_lows, col.regions=cl)
 levelplot(artic_lows, col.regions=cl, names.attr=c("July 2000_2010_2020", "July 2000_2010_2020", "July 2000_2010_2020"))
 levelplot(artic_lows, col.regions=cl, main="Artic decline variation in time", names.attr=c("July 2000_2010_2020", "July 2000_2010_2020", "July 2000_2010_2020"))
 
-# dev.off will clean the current graph
+# pdf
+pdf("Artic_decline.pdf")
+levelplot(artic_lows)
+cl <- colorRampPalette(c('blue','dark gray','white'))(100)
+levelplot(artic_lows, col.regions=cl)
+levelplot(artic_lows, col.regions=cl, names.attr=c("July 2000_2010_2020", "July 2000_2010_2020", "July 2000_2010_2020"))
+levelplot(artic_lows, col.regions=cl, main="Artic decline variation in time", names.attr=c("July 2000_2010_2020", "July 2000_2010_2020", "July 2000_2010_2020"))
 dev.off()
 
 # Sea_Ice_Highs_and_Lows
@@ -102,6 +108,24 @@ plotRGB(si_hl, r=1, g=2, b=3, stretch="Lin")
 plotRGB(si_hl, r=2, g=3, b=4, stretch="Lin")
 plotRGB(si_hl, r=2, g=3, b=4,, stretch="hist")
 
+# dev.off will clean the current graph
+dev.off()
+
+levelplot(si_hl)
+cl <- colorRampPalette(c('blue','dark gray','white'))(100)
+levelplot(si_hl, col.regions=cl)
+
+levelplot(si_hl, col.regions=cl, names.attr=c("September 2020 - March 2021", "September 2020 - March 2021", "September 2020 - March 2021"))
+levelplot(si_hl, col.regions=cl, main="Artic decline variation in time", names.attr=c("September 2020 - March 2021", "September 2020 - March 2021", "September 2020 - March 2021"))
+
+# pdf
+pdf("Artic_decline_.pdf")
+levelplot(si_hl)
+cl <- colorRampPalette(c('blue','dark gray','white'))(100)
+levelplot(si_hl, col.regions=cl)
+levelplot(si_hl, col.regions=cl, names.attr=c("September 2020 - March 2021", "September 2020 - March 2021", "September 2020 - March 2021"))
+levelplot(si_hl, col.regions=cl, main="Artic decline variation in time", names.attr=c("September 2020 - March 2021", "September 2020 - March 2021", "September 2020 - March 2021"))
+dev.off()
 
 
 
